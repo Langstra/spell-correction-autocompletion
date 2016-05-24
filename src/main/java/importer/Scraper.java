@@ -16,7 +16,13 @@ public class Scraper {
     public Scraper() {
     }
 
-    public List<String> scrape(File file, List<String> parseables) {
+    /**
+     * Returns text of all meta tags in the head with the given name attributes
+     * @param file
+     * @param nameAttributes
+     * @return
+     */
+    public List<String> scrape(File file, List<String> nameAttributes) {
 
         String everything = "";
         List<String> scrapedList = new ArrayList<String>();
@@ -31,8 +37,8 @@ public class Scraper {
 
         Document html = Jsoup.parse(everything);
         scrapedList.add(html.title());
-        for(String parseable : parseables) {
-            scrapedList.add(html.body().getElementsByTag(parseable).text());
+        for(String name : nameAttributes) {
+            scrapedList.add(html.head().getElementsByAttributeValue("name", name).attr("content"));
         }
 
         return scrapedList;
