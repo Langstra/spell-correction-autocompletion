@@ -71,4 +71,5 @@ buildNumber.properties
 hs_err_pid*
 
 utwente.txt
+log.txt
 
